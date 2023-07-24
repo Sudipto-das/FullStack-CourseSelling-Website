@@ -4,9 +4,11 @@ import {Card, Typography} from "@mui/material";
 import axios from "axios";
 import { useState } from 'react';
 
+
 function Signin() {
     const [email, setEmail] =useState('')
     const [password,setPasword] =useState('')
+    const [role,setRole]= useState('')
     return <div>
             <div style={{
                 paddingTop: 150,
@@ -20,6 +22,15 @@ function Signin() {
             </div>
         <div style={{display: "flex", justifyContent: "center"}}>
             <Card varint={"outlined"} style={{width: 400, padding: 20}}>
+            <select 
+            style={{padding:'0.7em 1em',background:"#CCCCFF",marginBottom:'0.5em',borderRadius:'0.2em' }}
+            onChange={(e) => {
+              setRole(e.target.value);
+            }}
+          >
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
+          </select>
                 <TextField
                     fullWidth={true}
                     id="outlined-basic"
@@ -44,7 +55,8 @@ function Signin() {
 
                 <Button size={"large"} variant="contained"
                 onClick={async ()=>{
-                    const response = await axios.post("http://localhost:3000/admin/login",{
+                    if(role === 'Admin'){
+                        const response = await axios.post("http://localhost:3000/admin/login",{
                         username:email,
                         password:password
                     },{
@@ -55,6 +67,21 @@ function Signin() {
                     const data = response.data
                     localStorage.setItem('token',data.token)
                     window.location='/courses'
+                    }
+                    else{
+                        const response = await axios.post("http://localhost:3000/users/login",{
+                        username:email,
+                        password:password
+                    },{
+                        headers:{
+                            "Content-type": "application/json"
+                        }
+                    });
+                    const data = response.data
+                    localStorage.setItem('token',data.token)
+                    window.location='/'
+                    }
+                    
                 }}> Signin</Button>
             </Card>
         </div>

@@ -1,4 +1,4 @@
-import { Card } from "@mui/material";
+import { Card ,Grid} from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Typography, TextField, Button } from "@mui/material";
@@ -29,12 +29,17 @@ function Course() {
     }).then(callback1);
   }, []);
 
-  return (
-    <div>
-      <CourseCard courseId={courseId} />
-      <UpdateCard courseId={courseId} />
-    </div>
-  );
+  return <div>
+  
+  <Grid container>
+      <Grid item lg={8} md={12} sm={12}>
+          <UpdateCard courseId={courseId} />
+      </Grid>
+      <Grid item lg={4} md={12} sm={12}>
+          <CourseCard courseId={courseId} />
+      </Grid>
+  </Grid>
+</div>
 }
 
 function UpdateCard(props) {

@@ -103,10 +103,16 @@ app.get("/admin/courses", authenticateJwt, async (req, res) => {
   // logic to get all courses
   // console.log("get worked");
   const course = await Course.find({});
+  
   res.json({ course });
 });
 
 // User routes
+app.get('/user/me',authenticateJwt,(req,res)=>{
+  const username = req.user.username
+  res.json({'username':username})
+
+})
 app.post("/users/signup", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
@@ -115,7 +121,7 @@ app.post("/users/signup", async (req, res) => {
   } else {
     const newUser = new User({ username, password });
     await newUser.save();
-    const token = jwt.sign({ username, role: "user" }, SECRET, {
+    const token = jwt.sign({ username, role: "user" }, SECRETKEY, {
       expiresIn: "1h",
     });
     res.json({ message: "User created successfully", token });
@@ -126,7 +132,7 @@ app.post("/users/login", async (req, res) => {
   const { username, password } = req.headers;
   const user = await User.findOne({ username, password });
   if (user) {
-    const token = jwt.sign({ username, role: "user" }, SECRET, {
+    const token = jwt.sign({ username, role: "user" }, SECRETKEY, {
       expiresIn: "1h",
     });
     res.json({ message: "Logged in successfully", token });
