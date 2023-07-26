@@ -1,23 +1,24 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Card, Typography } from "@mui/material";
-import {  useState } from "react";
+import { useState } from "react";
 import {
   atom,
   useRecoilState,
   useRecoilValue,
   useSetRecoilState,
 } from "recoil";
-import { Navigate, useNavigate } from "react-router-dom";
-
+import {  useNavigate } from "react-router-dom";
+import { userState } from "./store/atom/user";
+import { roleState } from "./store/atom/role";
 
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+  const navigate = useNavigate();
+  const setUser = useSetRecoilState(userState);
   const [role,setRole] = useRecoilState(roleState)
-  const navigate = useNavigate()
-
-
   return (
     <div>
       <div
@@ -33,10 +34,14 @@ function Signup() {
         </Typography>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Card varint={"outlined"} style={{ width: 400, padding: 20, }}>
-          
-          <select 
-            style={{padding:'0.7em 1em',background:"#CCCCFF",marginBottom:'0.5em',borderRadius:'0.2em' }}
+        <Card varint={"outlined"} style={{ width: 400, padding: 20 }}>
+          <select
+            style={{
+              padding: "0.7em 1em",
+              background: "#CCCCFF",
+              marginBottom: "0.5em",
+              borderRadius: "0.2em",
+            }}
             onChange={(e) => {
               setRole(e.target.value);
             }}
@@ -71,26 +76,26 @@ function Signup() {
             size={"large"}
             variant="contained"
             onClick={() => {
-            if(role==='Admin'){
-              fetch("http://localhost:3000/admin/signup", {
-                method: "POST",
-                body: JSON.stringify({
-                  username: email,
-                  password: password,
-                }),
-                headers: {
-                  "Content-type": "application/json",
-                },
-              }).then((res) => {
-                res.json().then((data) => {
-                  localStorage.setItem("token", data.token);
-                  navigate('/courses')
-                
+                if(role == 'Admin'){
+                fetch("http://localhost:3000/admin/signup", {
+                  method: "POST",
+                  body: JSON.stringify({
+                    username: email,
+                    password: password,
+                  }),
+                  headers: {
+                    "Content-type": "application/json",
+                  },
+                }).then((res) => {
+                  res.json().then((data) => {
+                    localStorage.setItem("token", data.token);
+                    setUser( email)
+                    setRole(role)
+                    navigate("/courses");
+                  });
                 });
-              });
-            }
-            else {
-                fetch("http://localhost:3000/users/signup", {
+                } else{
+                  fetch("http://localhost:3000/users/signup", {
                     method: "POST",
                     body: JSON.stringify({
                       username: email,
@@ -102,12 +107,15 @@ function Signup() {
                   }).then((res) => {
                     res.json().then((data) => {
                       localStorage.setItem("token", data.token);
-                      navigate('/usercourses')
-                      
+                      setUser( email)
+                      setRole(role)
+                      navigate("/Usercourses");
                     });
                   });
-            }
+                }
             }}
+          
+         
           >
             {" "}
             Signup
@@ -117,9 +125,5 @@ function Signup() {
     </div>
   );
 }
-export const roleState = atom({
-  key: "roleState",
-  default: '',
-});
 
 export default Signup;

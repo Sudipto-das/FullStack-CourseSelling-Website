@@ -1,52 +1,16 @@
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
-import { useContext, useEffect, useState } from "react";
+import { userState } from "./store/atom/user";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { roleState } from "./Signup";
+import { roleState } from "./store/atom/role";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const Appber = () => {
   const navigate = useNavigate();
-  const [adminEmail, setadminEmail] = useState(null);
-  const [userEmail, setUserEmail] = useState(null);
+  const user = useRecoilValue(userState);
   const role = useRecoilValue(roleState)
-  console.log("admin",adminEmail)
-  console.log("user",userEmail)
-  console.log(role)
-  
-   
-  useEffect(() => {
-    // Fetch admin data
-    if (role === "Admin") {
-      fetch("http://localhost:3000/admin/me", {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }).then((res) => {
-        res.json().then((data) => {
-          setadminEmail(data.massage);
-          
-        });
-      });
-    } else {
-      fetch("http://localhost:3000/user/me", {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }).then((res) => {
-        res.json().then((data) => {
-          setUserEmail(data.username);
-          
-        });
-      });
-    }
-  }, []);
-  
-  if (adminEmail) {
-    
+  if (user&&role=='Admin') {
     return (
       <div
         style={{
@@ -60,7 +24,7 @@ const Appber = () => {
       >
         <div style={{ marginLeft: 10 }}>
           <Typography variant={"h6"} style={{ fontWeight: "bold" }}>
-            Coursera
+            LearningAcademy
           </Typography>
         </div>
 
@@ -100,7 +64,8 @@ const Appber = () => {
         </div>
       </div>
     );
-  } else if (userEmail) {
+  }
+  if (user && role == 'User'){
     return (
       <div
         style={{
@@ -114,7 +79,7 @@ const Appber = () => {
       >
         <div style={{ marginLeft: 10 }}>
           <Typography variant={"h6"} style={{ fontWeight: "bold" }}>
-            Coursera
+            LearningAcademy
           </Typography>
         </div>
 
@@ -123,7 +88,7 @@ const Appber = () => {
             <div style={{ marginRight: 10 }}>
               <Button
                 onClick={() => {
-                  navigate("/addcourse");
+                  navigate('/purschesedcourses');
                 }}
               >
                 Purchesed
@@ -133,7 +98,7 @@ const Appber = () => {
             <div style={{ marginRight: 10 }}>
               <Button
                 onClick={() => {
-                  navigate("/courses");
+                  navigate("/Usercourses");
                 }}
               >
                 Courses
@@ -157,7 +122,6 @@ const Appber = () => {
   }
 
   return (
-    
     <div
       style={{
         display: "flex",
@@ -169,8 +133,8 @@ const Appber = () => {
       }}
     >
       <div style={{ marginLeft: 10 }}>
-        <Typography variant={"h6"} style={{ fontWeight: "bold" }}>
-          Coursera
+        <Typography variant={"h6"} style={{ fontWeight: "bold" ,fontFamily:'monospace'}}>
+          LearningAcademy
         </Typography>
       </div>
       <div style={{}}>

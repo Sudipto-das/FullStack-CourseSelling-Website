@@ -129,7 +129,7 @@ app.post("/users/signup", async (req, res) => {
 });
 
 app.post("/users/login", async (req, res) => {
-  const { username, password } = req.headers;
+  const { username, password } = req.body;
   const user = await User.findOne({ username, password });
   if (user) {
     const token = jwt.sign({ username, role: "user" }, SECRETKEY, {
@@ -146,12 +146,19 @@ app.get("/users/courses", authenticateJwt, async (req, res) => {
   res.json({ courses });
 });
 
-app.post("/users/courses/:courseId", async (req, res) => {
+app.post("/users/courses/:courseId",authenticateJwt, async (req, res) => {
   // logic to purchase a course
   const course = await Course.findById(req.params.courseId);
   if (course) {
     const user = await User.findOne({ username: req.user.username });
     if (user) {
+      const isCoursePurchased = user.purchesedCourse.some(
+        (purchasedCourse) => purchasedCourse.toString() === course._id.toString()
+      );
+  
+      if (isCoursePurchased) {
+        return res.json({ message: "You have already purchased this course" });
+      }
       user.purchesedCourse.push(course);
       await user.save();
       res.json({ message: "Course purchased successfully" });
@@ -169,7 +176,7 @@ app.get("/users/purchasedCourses", authenticateJwt, async (req, res) => {
     "purchesedCourse"
   );
   if (user) {
-    res.json({ purchasedCourses: user.purchasedCourses });
+    res.json({  "purchesedCourse":user.purchesedCourse,user });
   } else {
     res.json({ massage: "user not found" });
   }

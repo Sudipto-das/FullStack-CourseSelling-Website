@@ -10,13 +10,16 @@ const LandingPage = () => {
         <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
           <div className="sm:max-w-lg">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Wellcome to ecourse-era
+              Wellcome to <span style={{fontFamily:"monospace"}}>LearningAcademy</span>
             </h1>
             <p className="mt-4 text-xl text-gray-500">
+              <span style={{fontFamily:'cursive'}}>
               Transforming Education in the Digital Era In the ever-evolving
               landscape of education, online course platforms have emerged as a
               transformative force, revolutionizing the way individuals learn
               and acquire knowledge.
+              </span>
+             
             </p>
           </div>
           <div>

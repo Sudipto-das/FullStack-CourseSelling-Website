@@ -167,26 +167,23 @@ function CourseCard(props) {
           margin: 10,
           width: 300,
           minHeight: 200,
-          backgroundImage: `url(${course.imageLink})`,
-          backgroundSize: "cover", // Adjust background size to cover the whole card
-          backgroundPosition: "center",
-          color: "white",
+         
           position:'relative'
         }}
-      >
+      ><img src={course.imageLink} alt={course.title} style={{ width: "100%", height: 180, objectFit: "cover" }} />
         <Typography textAlign={"center"} variant="h5">
           {course.title}
         </Typography>
         <Typography textAlign={"center"} variant="subtitle2">
           {course.description}
         </Typography>
+        
         <Typography
           textAlign={"center"}
           variant="subtitle1"
           style={{
-            position: "absolute",
-            bottom: 8,
-            right: 10,
+            fontSize:'1.5em',
+            fontWeight:'bold'
           }}
         >
           Rs:{course.price}

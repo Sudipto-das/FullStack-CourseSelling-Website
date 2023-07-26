@@ -1,9 +1,10 @@
 import { Button, Card } from "@mui/material";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-const UserCourses=()=>{
-    const [courses, setCourses] = useState([]);
-    
+
+const UserCourses = () => {
+  const [courses, setCourses] = useState([]);
+
   useEffect(() => {
     fetch("http://localhost:3000/users/courses", {
       method: "GET",
@@ -12,63 +13,87 @@ const UserCourses=()=>{
       },
     }).then((res) => {
       res.json().then((data) => {
-        
-        setCourses(data.courses)
-        
+        setCourses(data.courses);
       });
     });
   }, []);
+
   return (
     <div
       style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
     >
       {courses.map((course) => {
-        return <Course course={course} />;
+        return <Course course={course} key={course._id} />;
       })}
     </div>
   );
-}
+};
+
 export function Course(props) {
-    
-    return (
-      <Card
-        style={{
-          margin: 10,
-          width: 300,
-          minHeight: 200,
-          backgroundImage: `url(${props.course.imageLink})`, // Set the background image
-          backgroundSize: "cover", // Adjust background size to cover the whole card
-          backgroundPosition: "center", // Center the background image
-          color:"white",
-          position: "relative",
-        }}
-      >
+  return (
+    <Card
+      style={{
+        margin: 10,
+        width: 300,
+        minHeight: 200,
+        position: "relative", // To enable positioning of the Button
+      }}
+    >
+      <img
+        src={props.course.imageLink}
+        alt={props.course.title}
+        style={{ width: "100%", height: 180, objectFit: "cover" }}
+      />
+      <div style={{ padding: "10px" }}>
         <Typography textAlign={"center"} variant="h5">
           {props.course.title}
         </Typography>
         <Typography textAlign={"center"} variant="subtitle1">
           {props.course.description}
         </Typography>
-        <Typography textAlign={"center"} variant="subtitle1" style={{
-         position:'absolute',
-         bottom:8,
-         right:10
-        }}>
-          Rs:{props.course.price}
-        </Typography>
-        <Button size={"small"} variant="contained" style={{
-        position: "absolute", // Set the position of the Button to absolute
-        bottom: 10, // Adjust the distance from the bottom
-        left: 10, // Adjust the distance from the left
-      }}onClick={()=>{
-           
-           
-        }}>
-          BUY
-        </Button>
-        
-      </Card>
-      
-    );
-  }
+      </div>
+      <br />
+      <br />
+      <Button
+        size={"small"}
+        variant="contained"
+        style={{
+          position: "absolute",
+          bottom: 10,
+          left: 10,
+        }}
+        onClick={() => {
+          // Handle the buy button click here
+          fetch('http://localhost:3000/users/courses/'+props.course._id,{
+            method:"POST",
+            headers:{
+              Authorization: "Bearer " + localStorage.getItem("token"),
+              "Content-type": "application/json",
+            }
+          }).then((res)=>{
+            res.json().then((data)=>{
+              alert(data.message)
+              console.log(data)
+            })
+          })
+        }}
+      >
+        BUY
+      </Button>
+      <Typography
+        textAlign={"center"}
+        variant="subtitle1"
+        style={{
+          position: "absolute",
+          bottom: 8,
+          right: 10,
+          fontWeight:'bold'
+        }}
+      >
+        Rs: {props.course.price}
+      </Typography>
+    </Card>
+  );
+}
+
 export default UserCourses;

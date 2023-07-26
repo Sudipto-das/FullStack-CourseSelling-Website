@@ -2,13 +2,18 @@ import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
 import {Card, Typography} from "@mui/material";
 import axios from "axios";
+import { useSetRecoilState,useRecoilState } from 'recoil';
+import { roleState } from './store/atom/role';
+import { userState } from './store/atom/user';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-
 function Signin() {
-    const [email, setEmail] =useState('')
-    const [password,setPasword] =useState('')
-    const [role,setRole]= useState('')
+    const navigate = useNavigate()
+    const [email, setEmail] = useState('')
+    const [password,setPasword] = useState('')
+    const setUser = useSetRecoilState(userState);
+    const [role,setRole] = useRecoilState(roleState)
     return <div>
             <div style={{
                 paddingTop: 150,
@@ -66,7 +71,9 @@ function Signin() {
                     });
                     const data = response.data
                     localStorage.setItem('token',data.token)
-                    window.location='/courses'
+                    setUser(email)
+                    setRole(role)
+                    navigate('/courses')
                     }
                     else{
                         const response = await axios.post("http://localhost:3000/users/login",{
@@ -79,7 +86,9 @@ function Signin() {
                     });
                     const data = response.data
                     localStorage.setItem('token',data.token)
-                    window.location='/'
+                    setUser(email)
+                    setRole(role)
+                    navigate('/Usercourses')
                     }
                     
                 }}> Signin</Button>
