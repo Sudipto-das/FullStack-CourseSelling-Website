@@ -64,7 +64,7 @@ export function Course(props) {
         }}
         onClick={() => {
           // Handle the buy button click here
-          fetch('http://ec2-16-171-175-60.eu-north-1.compute.amazonaws.com/users/courses/'+props.course._id,{
+          fetch('http://localhost:3000/users/courses/'+props.course._id,{
             method:"POST",
             headers:{
               Authorization: "Bearer " + localStorage.getItem("token"),

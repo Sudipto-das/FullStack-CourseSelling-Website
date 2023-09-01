@@ -10,7 +10,7 @@ import {
 } from "recoil";
 import {  useNavigate } from "react-router-dom";
 import { userState } from "./store/atom/user";
-import { roleState } from "./store/atom/role";
+
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -18,7 +18,7 @@ function Signup() {
   
   const navigate = useNavigate();
   const setUser = useSetRecoilState(userState);
-  const [role,setRole] = useRecoilState(roleState)
+  
   return (
     <div>
       <div
@@ -35,20 +35,7 @@ function Signup() {
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Card varint={"outlined"} style={{ width: 400, padding: 20 }}>
-          <select
-            style={{
-              padding: "0.7em 1em",
-              background: "#CCCCFF",
-              marginBottom: "0.5em",
-              borderRadius: "0.2em",
-            }}
-            onChange={(e) => {
-              setRole(e.target.value);
-            }}
-          >
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
-          </select>
+         
           <TextField
             onChange={(evant11) => {
               let elemt = evant11.target;
@@ -76,8 +63,8 @@ function Signup() {
             size={"large"}
             variant="contained"
             onClick={() => {
-                if(role == 'Admin'){
-                fetch("http://ec2-16-171-175-60.eu-north-1.compute.amazonaws.com/admin/signup", {
+                
+                fetch("http://localhost:3000/users/signup", {
                   method: "POST",
                   body: JSON.stringify({
                     username: email,
@@ -90,29 +77,11 @@ function Signup() {
                   res.json().then((data) => {
                     localStorage.setItem("token", data.token);
                     setUser( email)
-                    setRole(role)
-                    navigate("/courses");
+                    
+                    navigate("/UserCourses");
                   });
                 });
-                } else{
-                  fetch("http://ec2-16-171-175-60.eu-north-1.compute.amazonaws.com/users/signup", {
-                    method: "POST",
-                    body: JSON.stringify({
-                      username: email,
-                      password: password,
-                    }),
-                    headers: {
-                      "Content-type": "application/json",
-                    },
-                  }).then((res) => {
-                    res.json().then((data) => {
-                      localStorage.setItem("token", data.token);
-                      setUser( email)
-                      setRole(role)
-                      navigate("/Usercourses");
-                    });
-                  });
-                }
+                
             }}
           
          

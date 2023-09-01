@@ -13,7 +13,7 @@ import Appbar from "./Appber";
 import { userState } from "./store/atom/user";
 import UserCourses from "./UserCourses";
 import { atom, useSetRecoilState, useRecoilValue } from "recoil";
-import { roleState } from "./store/atom/role";
+
 import Purchesed from "./Purchesed";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
     <div>
       <Router>
         <Appbar />
-        {/* <InitUser /> */}
+        <InitUser />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signin" element={<Signin />} />
@@ -30,54 +30,50 @@ function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/course/:courseId" element={<Course />} />
           <Route path="/usercourses" element={<UserCourses />} />
-          <Route path='/purschesedcourses' element={<Purchesed/>}></Route>
+          <Route path="/purschesedcourses" element={<Purchesed />}></Route>
         </Routes>
       </Router>
     </div>
   );
 }
-// function InitUser() {
-//   const setUser = useSetRecoilState(userState);
-//   const role = useRecoilValue(roleState)
-//   const init = async () => {
-//     try {
-//       if(role =='admin'){
-//         const response = await axios.get(`http://localhost:3000/admin/me`, {
-//         headers: {
-//           Authorization: "Bearer " + localStorage.getItem("token"),
-//         },
-//       });
+function InitUser() {
+  const setUser = useSetRecoilState(userState);
 
-//       if (response.data.massage) {
-//         setUser(response.data.massage);
-//         console.log(response.data.massage)
-//       } else {
-//         setUser(null);
-//       } 
-//       }else{
-//         const response = await axios.get(`http://localhost:3000/user/me`, {
-//           headers: {
-//             Authorization: "Bearer " + localStorage.getItem("token"),
-//           },
-//         });
-  
-//         if (response.data.massage) {
-//           setUser(response.data.massage);
-//         } else {
-//           setUser(null);
-//         }
-//       }
-      
-//     } catch (e) {
-//       setUser(null);
-//     }
-//   };
+  const init = async () => {
+    try {
+      console.log('hello')
+      const response = await fetch("http://localhost:3000/user/me", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          "Content-type": "application/json",
+        },
+      });
 
-//   useEffect(() => {
-//     init();
-//   }, []);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
 
-//   return <></>;
-// }
+      const data = await response.json();
+
+      if (data) {
+        setUser(data);
+        console.log(data);
+      } else {
+        setUser(null);
+        console.log(null);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  return <></>;
+}
+
 
 export default App;
