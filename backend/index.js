@@ -117,7 +117,7 @@ app.post("/users/signup", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
   if (user) {
-    res.status(403).json({ message: "User already exists" });
+    res.status(403).json({ message: "User already register" });
   } else {
     const newUser = new User({ username, password });
     await newUser.save();
