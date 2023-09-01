@@ -77,7 +77,7 @@ function Signup() {
             variant="contained"
             onClick={() => {
                 if(role == 'Admin'){
-                fetch("http://localhost:3000/admin/signup", {
+                fetch("http://ec2-16-171-175-60.eu-north-1.compute.amazonaws.com/admin/signup", {
                   method: "POST",
                   body: JSON.stringify({
                     username: email,
@@ -95,7 +95,7 @@ function Signup() {
                   });
                 });
                 } else{
-                  fetch("http://localhost:3000/users/signup", {
+                  fetch("http://ec2-16-171-175-60.eu-north-1.compute.amazonaws.com/users/signup", {
                     method: "POST",
                     body: JSON.stringify({
                       username: email,

@@ -61,7 +61,7 @@ function Signin() {
                 <Button size={"large"} variant="contained"
                 onClick={async ()=>{
                     if(role === 'Admin'){
-                        const response = await axios.post("http://localhost:3000/admin/login",{
+                        const response = await axios.post("http://ec2-16-171-175-60.eu-north-1.compute.amazonaws.com/admin/login",{
                         username:email,
                         password:password
                     },{
@@ -76,7 +76,7 @@ function Signin() {
                     navigate('/courses')
                     }
                     else{
-                        const response = await axios.post("http://localhost:3000/users/login",{
+                        const response = await axios.post("http://ec2-16-171-175-60.eu-north-1.compute.amazonaws.com/users/login",{
                         username:email,
                         password:password
                     },{

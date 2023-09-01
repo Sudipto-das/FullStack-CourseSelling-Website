@@ -120,7 +120,7 @@ function UpdateCard(props) {
             function callback1(res) {
               res.json().then(callback2);
             }
-            fetch("http://localhost:3000/admin/courses/" + props.courseId, {
+            fetch("http://ec2-16-171-175-60.eu-north-1.compute.amazonaws.com/admin/courses/" + props.courseId, {
               method: "PUT",
               body: JSON.stringify({
                 title: title,

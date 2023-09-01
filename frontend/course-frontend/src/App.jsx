@@ -21,7 +21,7 @@ function App() {
     <div>
       <Router>
         <Appbar />
-        <InitUser />
+        {/* <InitUser /> */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signin" element={<Signin />} />
@@ -36,47 +36,48 @@ function App() {
     </div>
   );
 }
-function InitUser() {
-  const setUser = useSetRecoilState(userState);
-  const role = useRecoilValue(roleState)
-  const init = async () => {
-    try {
-      if(role =='admin'){
-        const response = await axios.get(`http://localhost:3000/admin/me`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
+// function InitUser() {
+//   const setUser = useSetRecoilState(userState);
+//   const role = useRecoilValue(roleState)
+//   const init = async () => {
+//     try {
+//       if(role =='admin'){
+//         const response = await axios.get(`http://localhost:3000/admin/me`, {
+//         headers: {
+//           Authorization: "Bearer " + localStorage.getItem("token"),
+//         },
+//       });
 
-      if (response.data.massage) {
-        setUser(response.data.massage);
-      } else {
-        setUser(null);
-      } 
-      }else{
-        const response = await axios.get(`http://localhost:3000/user/me`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
+//       if (response.data.massage) {
+//         setUser(response.data.massage);
+//         console.log(response.data.massage)
+//       } else {
+//         setUser(null);
+//       } 
+//       }else{
+//         const response = await axios.get(`http://localhost:3000/user/me`, {
+//           headers: {
+//             Authorization: "Bearer " + localStorage.getItem("token"),
+//           },
+//         });
   
-        if (response.data.massage) {
-          setUser(response.data.massage);
-        } else {
-          setUser(null);
-        }
-      }
+//         if (response.data.massage) {
+//           setUser(response.data.massage);
+//         } else {
+//           setUser(null);
+//         }
+//       }
       
-    } catch (e) {
-      setUser(null);
-    }
-  };
+//     } catch (e) {
+//       setUser(null);
+//     }
+//   };
 
-  useEffect(() => {
-    init();
-  }, []);
+//   useEffect(() => {
+//     init();
+//   }, []);
 
-  return <></>;
-}
+//   return <></>;
+// }
 
 export default App;
