@@ -17,20 +17,23 @@ const Appber = () => {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          padding: 5,
+          padding: '.5em 0',
           marginBottom: "1em",
           zIndex: 1,
-          background: "#CCCCFF",
+          width:'82%',
+          margin:'0 auto',
+          marginTop:'1em',
+          
         }}
       >
-        <div style={{ marginLeft: 10 }}>
-          <Typography variant={"h6"} style={{ fontWeight: "bold" }}>
+        <div >
+          <Typography variant={"h6"} style={{ fontWeight: "bold",fontFamily:'monospace' }}>
             LearningAcademy
           </Typography>
         </div>
 
         <div style={{ display: "flex" }}>
-          <div style={{ marginRight: 10, display: "flex" }}>
+          <div style={{  display: "flex" }}>
             <div style={{ marginRight: 10 }}>
               <Button
                 onClick={() => {
@@ -41,7 +44,7 @@ const Appber = () => {
               </Button>
             </div>
 
-            <div style={{ marginRight: 10 }}>
+            <div >
               <Button
                 onClick={() => {
                   navigate("/Usercourses");
@@ -72,18 +75,21 @@ const Appber = () => {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        padding: 5,
+        padding: '.5em 0',
         marginBottom: "1em",
         zIndex: 1,
-        background: "#CCCCFF",
+        width:'79%',
+        margin:'0 auto',
+        marginTop:'1em',
+        
       }}
     >
-      <div style={{ marginLeft: 10 }}>
+      <div >
         <Typography variant={"h6"} style={{ fontWeight: "bold" ,fontFamily:'monospace'}}>
           LearningAcademy
         </Typography>
       </div>
-      <div style={{}}>
+      <div >
         <Avatar alt="Remy Sharp" src="" />
       </div>
     </div>
