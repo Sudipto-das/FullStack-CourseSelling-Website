@@ -35,7 +35,7 @@ const LandingPage = () => {
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                         <div className="h-80 w-90  rounded-lg">
                           <img
-                            src="./student1.png"
+                            src="https://pngimg.com/d/student_PNG151.png"
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
@@ -90,12 +90,15 @@ const LandingPage = () => {
           display: "flex",
           justifyContent: "space-between",
           gap:'3em',
-          padding: ".5em 0",
+          padding: ".5em 0.5em",
           marginBottom: "1em",
           zIndex: 1,
           width: "82%",
           margin: "0 auto",
           marginTop: "1em",
+          background:'gray',
+          
+
         }}
       >
         <div style={{width:'23em',fontFamily:"initial"}}>

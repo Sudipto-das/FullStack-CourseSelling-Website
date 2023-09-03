@@ -42,7 +42,7 @@ function InitUser() {
   const init = async () => {
     try {
       console.log('hello')
-      const response = await fetch("http://localhost:3000/user/me", {
+      const response = await fetch("http://ec2-16-171-160-8.eu-north-1.compute.amazonaws.com:3000/user/me", {
         method: "GET",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),

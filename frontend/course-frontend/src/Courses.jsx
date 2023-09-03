@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/admin/courses/", {
+    fetch("http://ec2-16-171-160-8.eu-north-1.compute.amazonaws.com:3000/admin/courses/", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),

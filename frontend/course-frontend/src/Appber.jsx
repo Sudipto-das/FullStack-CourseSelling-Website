@@ -4,7 +4,7 @@ import Avatar from "@mui/material/Avatar";
 import { userState } from "./store/atom/user";
 import { useNavigate } from "react-router-dom";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue} from "recoil";
 
 const Appber = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const Appber = () => {
         }}
       >
         <div >
-          <Typography variant={"h6"} style={{ fontWeight: "bold",fontFamily:'monospace' }}>
+          <Typography variant={"h6"} style={{ fontWeight: "bold",fontFamily:'monospace', }}>
             LearningAcademy
           </Typography>
         </div>
@@ -74,6 +74,7 @@ const Appber = () => {
     <div
       style={{
         display: "flex",
+        
         justifyContent: "space-between",
         padding: '.5em 0',
         marginBottom: "1em",
