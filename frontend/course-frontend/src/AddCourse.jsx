@@ -72,7 +72,7 @@ const AddCourse = () => {
           <br />
           <Button size={"large"} variant="contained" 
           onClick={()=>{
-            fetch('http://ec2-16-171-160-8.eu-north-1.compute.amazonaws.com:3000/admin/courses',{ method: "POST",
+            fetch('http://localhost:3000/admin/courses',{ method: "POST",
             body: JSON.stringify({
                 title: title,
                 description: description,

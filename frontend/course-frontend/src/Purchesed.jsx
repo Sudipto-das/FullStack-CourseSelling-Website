@@ -4,7 +4,7 @@ import {Typography} from "@mui/material";
 const Purchesed = ()=>{
     const [courses, setCourses] = useState([])
     useEffect(()=>{
-        fetch('http://ec2-16-171-160-8.eu-north-1.compute.amazonaws.com:3000/users/purchasedCourses',{
+        fetch('http://localhost:3000/users/purchasedCourses',{
             method:'GET',
             headers:{
                 Authorization: "Bearer " + localStorage.getItem("token"),

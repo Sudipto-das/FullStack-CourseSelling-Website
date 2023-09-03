@@ -64,7 +64,7 @@ function Signup() {
             variant="contained"
             onClick={() => {
                 
-                fetch("http://ec2-16-171-160-8.eu-north-1.compute.amazonaws.com:3000/users/signup", {
+                fetch("http://localhost:3000/users/signup", {
                   method: "POST",
                   body: JSON.stringify({
                     username: email,
