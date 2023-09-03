@@ -35,7 +35,7 @@ const LandingPage = () => {
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                         <div className="h-80 w-90  rounded-lg">
                           <img
-                            src="https://w7.pngwing.com/pngs/240/987/png-transparent-five-people-watching-at-laptop-student-higher-education-study-skills-a-group-of-students-class-people-public-relations.png"
+                            src="./student.png"
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
