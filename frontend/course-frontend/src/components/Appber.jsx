@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
-import { userState } from "./store/atom/user";
+import { userState } from "../store/atom/user";
 import { useNavigate } from "react-router-dom";
 
 import { useRecoilValue} from "recoil";

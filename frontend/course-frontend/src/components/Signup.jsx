@@ -9,7 +9,7 @@ import {
   useSetRecoilState,
 } from "recoil";
 import {  useNavigate } from "react-router-dom";
-import { userState } from "./store/atom/user";
+import { userState } from "../store/atom/user";
 
 
 function Signup() {

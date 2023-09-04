@@ -4,7 +4,7 @@ import { Card, Typography } from "@mui/material";
 import axios from "axios";
 import { useSetRecoilState, useRecoilState } from "recoil";
 
-import { userState } from "./store/atom/user";
+import { userState } from "../store/atom/user";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 

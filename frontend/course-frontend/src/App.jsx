@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
-import LandingPage from "./LandingPage";
-import Signin from "./Signin";
-import Signup from "./Signup";
+import LandingPage from "./components/LandingPage";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
-import AddCourse from "./AddCourse";
-import Courses from "./Courses";
-import Course from "./Course";
-import Appbar from "./Appber";
+import AddCourse from "./components/AddCourse";
+import Courses from "./components/Courses";
+import Course from "./components/Course";
+import Appbar from "./components/Appber";
 import { userState } from "./store/atom/user";
-import UserCourses from "./UserCourses";
+import UserCourses from "./components/UserCourses";
 import { atom, useSetRecoilState, useRecoilValue } from "recoil";
 
-import Purchesed from "./Purchesed";
+import Purchesed from "./components/Purchesed";
 
 function App() {
   return (
