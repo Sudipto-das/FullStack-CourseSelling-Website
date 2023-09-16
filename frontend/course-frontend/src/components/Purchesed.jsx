@@ -4,7 +4,7 @@ import {Typography} from "@mui/material";
 const Purchesed = ()=>{
     const [courses, setCourses] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:3000/users/purchasedCourses',{
+        fetch('https://fullstack-course-selling.onrender.com/users/purchasedCourses',{
             method:'GET',
             headers:{
                 Authorization: "Bearer " + localStorage.getItem("token"),

@@ -6,7 +6,7 @@ const UserCourses = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/users/courses", {
+    fetch("https://fullstack-course-selling.onrender.com/users/courses", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -64,7 +64,7 @@ export function Course(props) {
         }}
         onClick={() => {
           // Handle the buy button click here
-          fetch('http://localhost:3000/users/courses/'+props.course._id,{
+          fetch('https://fullstack-course-selling.onrender.com/users/courses/'+props.course._id,{
             method:"POST",
             headers:{
               Authorization: "Bearer " + localStorage.getItem("token"),

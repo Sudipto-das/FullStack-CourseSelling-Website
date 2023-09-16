@@ -21,7 +21,7 @@ function Course() {
     function callback1(res) {
       res.json().then(callback2);
     }
-    fetch("http://localhost:3000/admin/courses/", {
+    fetch("https://fullstack-course-selling.onrender.com/admin/courses/", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -53,7 +53,7 @@ function UpdateCard(props) {
 
   console.log("UpdateCard rerendered");
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center",marginTop:'8em' }}>
       <Card varint={"outlined"} style={{ width: 400, padding: 20 }}>
         <Typography>Update course details</Typography>
 
@@ -120,7 +120,7 @@ function UpdateCard(props) {
             function callback1(res) {
               res.json().then(callback2);
             }
-            fetch("http://localhost:3000/admin/courses/" + props.courseId, {
+            fetch("https://fullstack-course-selling.onrender.com/admin/courses/" + props.courseId, {
               method: "PUT",
               body: JSON.stringify({
                 title: title,
