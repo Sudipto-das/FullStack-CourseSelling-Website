@@ -72,7 +72,7 @@ const AddCourse = () => {
           <br />
           <Button size={"large"} variant="contained" 
           onClick={()=>{
-            fetch('http://localhost:3000/admin/courses',{ method: "POST",
+            fetch('https://fullstack-course-selling.onrender.com/admin/courses',{ method: "POST",
             body: JSON.stringify({
                 title: title,
                 description: description,
